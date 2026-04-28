@@ -53,6 +53,7 @@ let usaSuperSalto = false
 let llaveCogida = false
 let respondioBien = false
 let bossActivo = false
+let bossHP = 5                              // vida del boss del nivel 2
 
 
 // ------------------------------------------------------------
@@ -527,9 +528,9 @@ function Crear_Boss() {
     tiles.placeOnTile(boss, tiles.getTileLocation(46, 8))
     boss.setFlag(SpriteFlag.GhostThroughWalls, true)
     animation.runImageAnimation(boss, BOSS_FRAMES, 350, true)
-    // Vida del boss: aguanta 5 golpes. Se guarda en el propio sprite con
-    // sprites.setDataNumber para no tener que arrastrar variables globales.
-    sprites.setDataNumber(boss, "hp", 5)
+    // Vida del boss: aguanta 5 golpes. Uso una variable global porque solo hay
+    // un boss en el juego y asi me ahorro tener que guardar el HP en el sprite.
+    bossHP = 5
     boss.sayText("HP 5", 1500, false)
     bossActivo = true
 }
@@ -550,8 +551,6 @@ function Enemigo_1(Fila: number, Columna: number, Velocidad_x: number) {
     enem.vx = Velocidad_x
     enem.ay = 250         // gravedad para que caiga si pisa un hueco
     animation.runImageAnimation(enem, ENEMY1_FRAMES, 200, true)
-    // Vida: aguanta 1 golpe (se guarda dentro del propio sprite).
-    sprites.setDataNumber(enem, "hp", 1)
 }
 
 // Enemigo tipo 2: el mismo patron pero con otra imagen y mas velocidad.
@@ -562,8 +561,6 @@ function Enemigo_2(Fila: number, Columna: number, Velocidad_x: number) {
     enem.vx = Velocidad_x
     enem.ay = 250
     animation.runImageAnimation(enem, ENEMY2_FRAMES, 150, true)
-    // Este enemigo aguanta 2 golpes.
-    sprites.setDataNumber(enem, "hp", 2)
 }
 
 
@@ -716,12 +713,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite, otherSprite) {
     if (sprite.vy > 0 && sprite.bottom <= otherSprite.top + 6) {
         // El jugador cae sobre el boss: le baja un punto de vida.
-        let hp = sprites.readDataNumber(otherSprite, "hp")
-
-        hp = hp - 1
-        sprites.setDataNumber(otherSprite, "hp", hp)
-        otherSprite.sayText("HP " + hp, 800, false)
-        if (hp <= 0) {
+        bossHP = bossHP - 1
+        otherSprite.sayText("HP " + bossHP, 800, false)
+        if (bossHP <= 0) {
             otherSprite.destroy(effects.fire, 500)
             info.changeScoreBy(500)
             bossActivo = false
@@ -899,33 +893,23 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.InBackground)
 })
 
-// Cuando un proyectil toca a un enemigo: reduce su vida; si llega a 0, lo destruye.
+// Cuando un proyectil toca a un enemigo: lo destruye de un golpe.
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprite.destroy()
-    let hp = sprites.readDataNumber(otherSprite, "hp")
-
-    hp = hp - 1
-    sprites.setDataNumber(otherSprite, "hp", hp)
-    if (hp <= 0) {
-        otherSprite.destroy(effects.fire, 300)
-        info.changeScoreBy(50)
-    } else {
-        otherSprite.sayText("HP " + hp, 600, false)
-    }
+    otherSprite.destroy(effects.fire, 300)
+    info.changeScoreBy(50)
 })
 
+// Cuando un proyectil toca al boss: le baja la vida (variable global bossHP).
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite, otherSprite) {
     sprite.destroy()
-    let hp = sprites.readDataNumber(otherSprite, "hp")
-
-    hp = hp - 1
-    sprites.setDataNumber(otherSprite, "hp", hp)
-    if (hp <= 0) {
+    bossHP = bossHP - 1
+    if (bossHP <= 0) {
         otherSprite.destroy(effects.fire, 500)
         info.changeScoreBy(500)
         bossActivo = false
     } else {
-        otherSprite.sayText("HP " + hp, 800, false)
+        otherSprite.sayText("HP " + bossHP, 800, false)
     }
 })
 
