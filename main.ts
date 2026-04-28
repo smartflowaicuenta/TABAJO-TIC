@@ -530,7 +530,6 @@ function Crear_Boss() {
     barra.attachToSprite(boss)
     barra.max = 5
     barra.value = 5
-    boss.setKind(SpriteKind.Boss)
     bossActivo = true
 }
 
@@ -860,11 +859,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSpri
 //  CONTROLES DEL JUGADOR
 // ============================================================
 
-// Paso 2: salto con el boton A. Solo salta si vy es 0 (esta sobre el suelo)
-// para evitar que pueda saltar varias veces seguidas en el aire.
+// Paso 2: salto con el boton A. Solo salta si esta tocando el suelo, asi
+// evito que pueda saltar varias veces seguidas en el aire.
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!JUGADOR) return
-    if (JUGADOR.isHittingTile(CollisionDirection.Bottom) || JUGADOR.vy == 0) {
+    if (JUGADOR.isHittingTile(CollisionDirection.Bottom)) {
         JUGADOR.vy = usaSuperSalto ? saltoExtra : saltoNormal
         music.play(music.melodyPlayable(music.jumpUp), music.PlaybackMode.InBackground)
     }
