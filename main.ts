@@ -23,16 +23,16 @@
 
 // ------------------------------------------------------------
 //  Tipos de sprite que voy a necesitar
+//  (Player, Enemy y Projectile ya vienen en el runtime de MakeCode Arcade,
+//   asi que solo tengo que declarar los nuevos.)
 // ------------------------------------------------------------
 namespace SpriteKind {
     export const Coin = SpriteKind.create()
     export const Mushroom = SpriteKind.create()
     export const Heart = SpriteKind.create()
     export const Key = SpriteKind.create()
-    export const Enemy = SpriteKind.create()
     export const Boss = SpriteKind.create()
     export const SurpriseBox = SpriteKind.create()
-    export const Projectile = SpriteKind.create()
     export const PowerTime = SpriteKind.create()    // recompensa de tiempo extra
     export const PowerSpeed = SpriteKind.create()   // recompensa de velocidad extra
     export const PowerJump = SpriteKind.create()    // recompensa para saltar mas alto
@@ -43,16 +43,16 @@ namespace SpriteKind {
 // ------------------------------------------------------------
 //  Variables globales del juego
 // ------------------------------------------------------------
-let JUGADOR: Sprite = null                  // el sprite del jugador (lo llamo en mayuscula porque es el principal)
-let Nivel_actual: number = 1                // nivel en el que estamos ahora
-let Contador_nivel: number = 2              // numero total de niveles del juego
-let velocidadJugador: number = 100          // velocidad de movimiento horizontal
-let saltoNormal: number = -210              // velocidad vertical al saltar
-let saltoExtra: number = -300               // velocidad cuando recoges el power-up de super-salto
-let usaSuperSalto: boolean = false          // si esta activo el super-salto
-let llaveCogida: boolean = false            // controlo si ya cogio la llave del nivel
-let respondioBien: boolean = false          // para el NPC
-let bossActivo: boolean = false             // para el "boss" del nivel 2
+let JUGADOR: Sprite = null
+let Nivel_actual = 1
+let Contador_nivel = 2
+let velocidadJugador = 100
+let saltoNormal = -210
+let saltoExtra = -300
+let usaSuperSalto = false
+let llaveCogida = false
+let respondioBien = false
+let bossActivo = false
 
 
 // ------------------------------------------------------------
@@ -121,7 +121,7 @@ const IMG_JUGADOR_ANDA_2 = img`
 
 // Frames de la moneda - hago varios mas estrechos para que parezca que gira.
 // Empiezo con la moneda redonda y voy reduciendo el ancho como dice el guion.
-const COIN_FRAMES: Image[] = [
+let COIN_FRAMES = [
     img`
         . . 5 5 5 5 . .
         . 5 4 4 4 4 5 .
@@ -204,7 +204,7 @@ const IMG_SETA = img`
     . . . . . . . . . . . . . . . .
 `
 
-const HEART_FRAMES: Image[] = [
+let HEART_FRAMES = [
     img`
         . . 2 2 . . 2 2 . .
         . 2 2 2 2 2 2 2 2 .
@@ -244,7 +244,7 @@ const HEART_FRAMES: Image[] = [
 ]
 
 // Llave (con animacion de brillo)
-const KEY_FRAMES: Image[] = [
+let KEY_FRAMES = [
     img`
         . . . 5 5 5 . . . .
         . . 5 4 4 4 5 . . .
@@ -272,7 +272,7 @@ const KEY_FRAMES: Image[] = [
 ]
 
 // Enemigo tipo 1 (basico, anda)
-const ENEMY1_FRAMES: Image[] = [
+let ENEMY1_FRAMES = [
     img`
         . . 2 2 2 2 2 2 . .
         . 2 2 2 2 2 2 2 2 .
@@ -300,7 +300,7 @@ const ENEMY1_FRAMES: Image[] = [
 ]
 
 // Enemigo tipo 2 (mas oscuro, va mas rapido)
-const ENEMY2_FRAMES: Image[] = [
+let ENEMY2_FRAMES = [
     img`
         . . a a a a a a . .
         . a a a a a a a a .
@@ -328,7 +328,7 @@ const ENEMY2_FRAMES: Image[] = [
 ]
 
 // Boss (mas grande, mas vida)
-const BOSS_FRAMES: Image[] = [
+let BOSS_FRAMES = [
     img`
         . . 2 2 2 2 2 2 2 2 2 2 . .
         . 2 2 f 2 2 2 2 2 2 f 2 2 .
@@ -520,7 +520,9 @@ function Crear_NPC() {
 
 // Crear el boss (mejora: solo aparece en el nivel 2).
 function Crear_Boss() {
-    if (Nivel_actual != 2) return
+    if (Nivel_actual != 2) {
+        return
+    }
     let boss = sprites.create(BOSS_FRAMES[0], SpriteKind.Boss)
     tiles.placeOnTile(boss, tiles.getTileLocation(46, 8))
     boss.setFlag(SpriteFlag.GhostThroughWalls, true)
@@ -701,13 +703,16 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
         otherSprite.destroy(effects.warmRadial, 200)
         info.changeLifeBy(-1)
         // Empuja al jugador para atras un poco.
-        sprite.vx = sprite.vx > 0 ? -velocidadJugador : velocidadJugador
+        if (sprite.vx > 0) {
+            sprite.vx = -velocidadJugador
+        } else {
+            sprite.vx = velocidadJugador
+        }
         sprite.vy = -120
     }
 })
 
-// --- El boss aguanta varios golpes (con status bar). Solo muere si lo "saltas"
-//   tres veces o le das con tres proyectiles.
+// --- El boss aguanta varios golpes. Solo muere si le pegas varias veces.
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite, otherSprite) {
     if (sprite.vy > 0 && sprite.bottom <= otherSprite.top + 6) {
         // El jugador cae sobre el boss: le baja un punto de vida.
@@ -722,7 +727,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite, otherSpr
         sprite.vy = saltoNormal
     } else {
         info.changeLifeBy(-1)
-        sprite.vx = sprite.vx > 0 ? -velocidadJugador : velocidadJugador
+        if (sprite.vx > 0) {
+            sprite.vx = -velocidadJugador
+        } else {
+            sprite.vx = velocidadJugador
+        }
         sprite.vy = -150
     }
 })
@@ -746,13 +755,16 @@ scene.onOverlapTile(SpriteKind.Player, myTiles.spike, function (sprite, location
 //  y la caja se transforma en un bloque de tierra (que el jugador puede pisar).
 // ============================================================
 game.onUpdateInterval(50, function () {
-    if (!JUGADOR) return
+    if (!JUGADOR) {
+        return
+    }
     if (JUGADOR.vy >= 0) return       // solo cuando va subiendo
 
     let col = Math.floor((JUGADOR.x) / 16)
     let row = Math.floor((JUGADOR.top) / 16)
-    if (row < 0) return
-
+    if (row < 0) {
+        return
+    }
     let loc = tiles.getTileLocation(col, row)
     if (tiles.tileAtLocationEquals(loc, myTiles.surprise_box)) {
         // La caja "se rompe" -> la sustituyo por dirt (que sigue siendo muro).
@@ -831,7 +843,9 @@ scene.onOverlapTile(SpriteKind.Player, myTiles.teleport_b, function (sprite, loc
 //  NPC con pregunta (mejora opcional: "interactuar con otros personajes")
 // ============================================================
 sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSprite) {
-    if (respondioBien) return
+    if (respondioBien) {
+        return
+    }
     // Pongo una pregunta tipica de bachillerato (resolver una ecuacion sencilla).
     game.showLongText("Hola! Si aciertas mi acertijo te doy una vida.\n\n  3*5 + 4 = ?\n  A: 10   B: 19   C: 21\n\n(Para responder, pulsa A si crees 19, B si crees 21, abajo si crees 10)", DialogLayout.Bottom)
     // Espera la respuesta del jugador con un menu sencillo.
@@ -854,9 +868,15 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.NPC, function (sprite, otherSpri
 // Paso 2: salto con el boton A. Solo salta si esta tocando el suelo, asi
 // evito que pueda saltar varias veces seguidas en el aire.
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!JUGADOR) return
+    if (!JUGADOR) {
+        return
+    }
     if (JUGADOR.isHittingTile(CollisionDirection.Bottom)) {
-        JUGADOR.vy = usaSuperSalto ? saltoExtra : saltoNormal
+        if (usaSuperSalto) {
+            JUGADOR.vy = saltoExtra
+        } else {
+            JUGADOR.vy = saltoNormal
+        }
         music.play(music.melodyPlayable(music.jumpUp), music.PlaybackMode.InBackground)
     }
 })
@@ -864,11 +884,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 // Mejora opcional: el boton B dispara un proyectil que destruye enemigos.
 // La direccion del proyectil depende de hacia donde esta mirando el jugador.
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!JUGADOR) return
+    if (!JUGADOR) {
+        return
+    }
+    // createProjectileFromSprite ya crea el sprite con SpriteKind.Projectile.
     let bala = sprites.createProjectileFromSprite(IMG_PROYECTIL, JUGADOR, 200, 0)
-    bala.setKind(SpriteKind.Projectile)
-    // Si el jugador se esta moviendo a la izquierda, lanzo el proyectil tambien hacia
-    // la izquierda. Si esta quieto, asumo que mira a la derecha.
+    // Si el jugador se esta moviendo a la izquierda, lanzo el proyectil tambien
+    // hacia la izquierda. Si esta quieto, asumo que mira a la derecha.
     if (JUGADOR.vx < 0) {
         bala.vx = -200
     }
