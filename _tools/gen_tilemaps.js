@@ -173,25 +173,12 @@ function generaNivel(nivel) {
 const hex1 = generaNivel(NIVEL_1);
 const hex2 = generaNivel(NIVEL_2);
 
-// Convertir el hex a base64 que es lo que MakeCode espera en JRES.
-const b64_1 = Buffer.from(hex1, "hex").toString("base64");
-const b64_2 = Buffer.from(hex2, "hex").toString("base64");
-
+// Mantengo el JRES vacio: los datos hex de los tilemaps van en el .ts directamente.
 const jres = {
     "*": {
         mimeType: "application/mkcd-tilemap",
         dataEncoding: "base64",
         namespace: "myTilemaps"
-    },
-    "level1": {
-        data: b64_1,
-        mimeType: "application/mkcd-tilemap",
-        tilemapTile: false
-    },
-    "level2": {
-        data: b64_2,
-        mimeType: "application/mkcd-tilemap",
-        tilemapTile: false
     }
 };
 
@@ -199,8 +186,9 @@ const outDir = path.join(__dirname, "..");
 fs.writeFileSync(path.join(outDir, "tilemap.g.jres"), JSON.stringify(jres, null, 4));
 
 // Generar el codigo TypeScript que crea los tilemaps en runtime.
-// Uso assets.tile`X` para que MakeCode reconozca los tiles del JRES.
-const tilesArray = "[assets.tile`transparency16`, assets.tile`grass_top`, assets.tile`dirt`, assets.tile`spike`, assets.tile`coin_marker`, assets.tile`mushroom_marker`, assets.tile`key_marker`, assets.tile`surprise_box`, assets.tile`lava`, assets.tile`teleport_a`, assets.tile`teleport_b`, assets.tile`spawn`, assets.tile`quiz_marker`, assets.tile`boss_marker`]";
+// Uso myTiles.X (defininos en images.g.ts) para que el runtime resuelva las
+// imagenes correctamente en codigo y en simulador.
+const tilesArray = "[myTiles.transparency16, myTiles.grass_top, myTiles.dirt, myTiles.spike, myTiles.coin_marker, myTiles.mushroom_marker, myTiles.key_marker, myTiles.surprise_box, myTiles.lava, myTiles.teleport_a, myTiles.teleport_b, myTiles.spawn, myTiles.quiz_marker, myTiles.boss_marker]";
 const ts = `// Auto-generado a partir del editor de tilemaps de MakeCode Arcade.
 // NO editar manualmente, los datos hex contienen las posiciones de cada tile y los muros.
 namespace myTilemaps {

@@ -1,32 +1,285 @@
-// Auto-generado a partir de images.g.jres.
-// NO editar a mano: cualquier cambio aqui se sobrescribe.
+// Tiles del juego. Cada uno mide 16x16 pixeles. El compilador los reconoce
+// como "fixed instance" y por eso aparecen en el editor de tilemaps.
+// Los voy a usar como muros, suelos, pinchos, marcadores de monedas...
+
 namespace myTiles {
     //% fixedInstance jres blockIdentity=images._tile
-    export const transparency16 = image.ofBuffer(hex`87041000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`);
+    export const transparency16 = img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+
     //% fixedInstance jres blockIdentity=images._tile
-    export const grass_top = image.ofBuffer(hex`870410001000000077e6eeedeedeeeee67e6edeeeeeeeeed67e6eddeeeeeeeee77e6eeeedeeeedee67e6deeeeeeeeeee67d6eeeeeeeeeeee67e7eeeedeeeeede77e6dedeeeeeeeee67e6eeeeeeeeedee77d6eeeeeeeeeeee67e6eeeeeeeeeeee67e7edeeeeedeeee67d6eddeeeeedeee77e6eeeeeeeeeeee67e6deeeeeeeeeed67e6eeeeeeedeeee`);
+    export const grass_top = img`
+        7 7 7 7 7 7 7 7 7 7 7 7 7 7 7 7
+        7 6 6 7 6 6 6 7 6 7 6 6 6 7 6 6
+        6 6 6 6 6 6 7 6 6 6 6 7 6 6 6 6
+        e e e e e d e e e d e e d e e e
+        e d d e e e e e e e e d d e e e
+        e e e e d e e d e e e e e e d e
+        d e e e e e e e e e e e e e e e
+        e e d e e e e d e e e e d e e e
+        e e e e e e e e e e e e e e e e
+        e e e d e e d e e e e e e e e e
+        e e e e e e e e e e e d e e e d
+        d e e e e e e e e e e e e e e e
+        e e e d e e e e d e e e e e e e
+        e e e e e e e e e e e e d e e e
+        e d e e e e e e e e e e e e d e
+        e e e e e e d e e e e e e e e e
+    `;
+
     //% fixedInstance jres blockIdentity=images._tile
-    export const dirt = image.ofBuffer(hex`8704100010000000eeeeeeeeedeeeeeedeeeeeeeeeeeeeeeeeeeeeedeeeeeeedeeeeedeeeedeeeeeeeeeeeeeeeeeeeeededeeeeeedeedeeeeeeeeeeeeeeeeeeeeeeedeeeeeeeeeeeeedeeeeeeeedeeeeeeeeeeeeeeeeeeeeeeeeeeeddeeedeeedeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedeeeeeeeeeeeeeeeeedeeeeedeeeedeeeeeeeeeeeeeeee`);
+    export const dirt = img`
+        e e e e e e e e e e e e e e e e
+        e d e e e d e e e e e d e e e e
+        e e e e e e e e e e e e e e e e
+        e e e e e d e e d e e e e d e e
+        e e e d e e e e e e e e e e e e
+        e e e e e e e d e e e e e e d e
+        e e d e e e e e e e d e e e e e
+        e e e e e e e e e e e e e e e e
+        d e e e e d e e e e e e e e e e
+        e e e e e e e e e e d e e e e e
+        e e e e e e e e d e e e e e e e
+        e e e d e e e e e e e e e e d e
+        e e e e e e e e e e e e e e e e
+        e e e e e d e e e e d e e e e e
+        e e d e e e e e e e e e e e d e
+        e e e e e e e e e e e e e e e e
+    `;
+
     //% fixedInstance jres blockIdentity=images._tile
-    export const spike = image.ofBuffer(hex`8704100010000000000010efedeeeeee000011efeeeddeee001011efeeeeeeee000011efdeeeeeee000010efeddedeee000011efeeeeeeee001011efeeeeeeee000011efeeeeeeee000010efededdeee000011efeeeeeeee001011efdedeeeee000011efeeeeeeee000010efedeeeeee000011efeededeee001011efeeeeeeee000011efeeeeeeee`);
+    export const spike = img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . 1 . . . 1 . . . 1 . . . 1 .
+        . 1 1 1 . 1 1 1 . 1 1 1 . 1 1 1
+        1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+        f f f f f f f f f f f f f f f f
+        e e e e e e e e e e e e e e e e
+        d e e e d e e e d e e e d e e e
+        e e e d e e e e e e d e e e e e
+        e d e e e e e e d e e e e e e e
+        e e e e d e e e e e d e e d e e
+        e e e e e e e e e e e e e e e e
+        e d e e d e e e d e e e e d e e
+        e e e e e e e e e e e e e e e e
+        e e e e e e e e e e e e e e e e
+    `;
+
     //% fixedInstance jres blockIdentity=images._tile
-    export const coin_marker = image.ofBuffer(hex`87041000100000000000000000000000000000000000000000005555550000000050555555050000005555555555000000555555555500000055555555550000005555555555000000555555555500000055555555550000005055555505000000005555550000000000000000000000000000000000000000000000000000000000000000000000`);
+    export const coin_marker = img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . 5 5 5 5 5 5 . . . . . .
+        . . . 5 5 5 5 5 5 5 5 . . . . .
+        . . 5 5 5 5 5 5 5 5 5 5 . . . .
+        . . 5 5 5 5 5 5 5 5 5 5 . . . .
+        . . 5 5 5 5 5 5 5 5 5 5 . . . .
+        . . 5 5 5 5 5 5 5 5 5 5 . . . .
+        . . 5 5 5 5 5 5 5 5 5 5 . . . .
+        . . 5 5 5 5 5 5 5 5 5 5 . . . .
+        . . . 5 5 5 5 5 5 5 5 . . . . .
+        . . . . 5 5 5 5 5 5 . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+
     //% fixedInstance jres blockIdentity=images._tile
-    export const mushroom_marker = image.ofBuffer(hex`87041000100000000000000000000000000000000000000000000000000000000000770000000000007077070000000000777677000000000077777700000000007777770000000000777677000000000070770700000000000077000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`);
+    export const mushroom_marker = img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . 7 7 7 7 . . . . . . .
+        . . . . 7 7 7 7 7 7 . . . . . .
+        . . . 7 7 6 7 7 6 7 7 . . . . .
+        . . . 7 7 7 7 7 7 7 7 . . . . .
+        . . . . 7 7 7 7 7 7 . . . . . .
+        . . . . . 7 7 7 7 . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+
     //% fixedInstance jres blockIdentity=images._tile
-    export const key_marker = image.ofBuffer(hex`87041000100000000000000000000000000000000000000000004444000000000040444404000000004444444400000000444444440000000044444444000000004444444400000000444444440000000044444444000000004044440400000000004444000000000000000000000000000000000000000000000000000000000000000000000000`);
+    export const key_marker = img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . 4 4 4 4 4 4 . . . . . .
+        . . . 4 4 4 4 4 4 4 4 . . . . .
+        . . 4 4 4 4 4 4 4 4 4 4 . . . .
+        . . 4 4 4 4 4 4 4 4 4 4 . . . .
+        . . 4 4 4 4 4 4 4 4 4 4 . . . .
+        . . 4 4 4 4 4 4 4 4 4 4 . . . .
+        . . . 4 4 4 4 4 4 4 4 . . . . .
+        . . . . 4 4 4 4 4 4 . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+
     //% fixedInstance jres blockIdentity=images._tile
-    export const surprise_box = image.ofBuffer(hex`8704100010000000eeeeeeeeeeeeeeee4e444444444444e44e555555555555e44e454444444454e44e455555555554e44e45e5eeee5e54e44e45e5ffee5e54e44e45e5efef5f54e44e45e5efee5e54e44e45e5eeee5e54e44e45e555f55554e44e455545444454e44e454454555555e44e555545444444e44e4444e4eeeeeeeeeeeeeeeeeeeeeeee`);
+    export const surprise_box = img`
+        e e e e e e e e e e e e e e e e
+        e 4 4 4 4 4 4 4 4 4 4 4 4 4 4 e
+        e 4 5 5 5 5 5 5 5 5 5 5 5 5 4 e
+        e 4 5 4 4 4 4 4 4 4 4 4 4 5 4 e
+        e 4 5 4 5 5 5 5 5 5 5 5 4 5 4 e
+        e 4 5 4 5 e e e e e e 5 4 5 4 e
+        e 4 5 4 5 e f f f e 5 5 4 5 4 e
+        e 4 5 4 5 e f e e e 5 4 5 4 e e
+        e 4 5 4 5 e e f e e 5 4 5 4 e e
+        e 4 5 4 5 e e e e e f 4 5 4 e e
+        e 4 5 4 5 e e f e e 5 4 5 4 e e
+        e 4 5 4 5 5 5 5 5 5 5 4 5 4 e e
+        e 4 5 4 4 4 4 4 4 4 4 4 5 4 e e
+        e 4 5 5 5 5 5 5 5 5 5 5 5 4 e e
+        e 4 4 4 4 4 4 4 4 4 4 4 4 4 e e
+        e e e e e e e e e e e e e e e e
+    `;
+
     //% fixedInstance jres blockIdentity=images._tile
-    export const lava = image.ofBuffer(hex`87041000100000002224424224244222422444422224442242222444422424424442242442422444244242244442222422444222244242242224444224244222422424424224444242222444422424424442222444422444224242242442222422444242244442244224444222244442422224424224244224422424424222422244222444422224`);
+    export const lava = img`
+        2 2 2 4 4 2 2 2 2 4 2 2 2 2 4 2
+        2 4 4 4 2 2 2 4 4 4 2 2 4 4 2 2
+        4 4 2 2 2 4 4 4 2 2 2 4 4 2 2 4
+        2 2 2 4 4 4 2 2 2 4 4 4 2 2 4 4
+        2 4 4 4 2 2 4 4 4 2 2 2 4 4 4 2
+        4 4 2 2 4 4 4 2 2 2 4 4 4 2 2 2
+        2 2 4 4 4 2 2 2 4 4 4 2 2 2 4 4
+        4 4 4 2 2 2 4 4 4 2 2 4 4 4 2 2
+        4 2 2 2 4 4 4 2 2 4 4 4 2 2 2 4
+        2 2 4 4 4 2 2 4 4 4 2 2 2 4 4 4
+        4 4 4 2 2 2 4 4 4 2 2 4 4 4 2 2
+        2 2 2 4 4 4 2 2 2 4 4 4 2 2 4 4
+        2 4 4 4 2 2 2 4 4 4 2 2 4 4 2 2
+        4 4 2 2 2 4 4 4 2 2 2 4 4 2 2 2
+        2 2 2 4 4 4 2 2 2 4 4 4 2 2 2 4
+        2 2 4 4 2 2 2 4 4 4 2 2 4 4 4 2
+    `;
+
     //% fixedInstance jres blockIdentity=images._tile
-    export const teleport_a = image.ofBuffer(hex`870410001000000000b0bbbbbbbb0b0000bbccccccccbb00b0cbbcbbbbcbbc0bb0cbbb1111bbbc0bbbbc1bbbbbb1cbbbbbbcb1cbbc1bcbbbbbbcb1bccb1bcbbbbbbcb1bccb1bcbbbbbbcb1cbbc1bcbbbbbbc1bbbbbb1cbbbb0cbbb1111bbbc0bb0cbbcbbbbcbbc0b00bbccccccccbb0000b0bbbbbbbb0b0000000000000000000000000000000000`);
+    export const teleport_a = img`
+        . . . . b b b b b b . . . . . .
+        . . b b b b b b b b b b . . . .
+        . b b b c c c c c c b b b . . .
+        b b c c b b b b b b c c b b . .
+        b c c b b 1 1 1 1 b b c c b . .
+        b c b b 1 b b b b 1 b b c b . .
+        b c b 1 b b c c b b 1 b c b . .
+        b c b 1 b c b b c b 1 b c b . .
+        b c b 1 b c b b c b 1 b c b . .
+        b c b 1 b b c c b b 1 b c b . .
+        b c b b 1 b b b b 1 b b c b . .
+        b c c b b 1 1 1 1 b b c c b . .
+        b b c c b b b b b b c c b b . .
+        . b b b c c c c c c b b b . . .
+        . . b b b b b b b b b b . . . .
+        . . . . b b b b b b . . . . . .
+    `;
+
     //% fixedInstance jres blockIdentity=images._tile
-    export const teleport_b = image.ofBuffer(hex`87041000100000000090999999990900009988888888990090899899998998099089991111999809999819999991899999989189981989999998919889198999999891988919899999989189981989999998199999918999908999111199980990899899998998090099888888889900009099999999090000000000000000000000000000000000`);
+    export const teleport_b = img`
+        . . . . 9 9 9 9 9 9 . . . . . .
+        . . 9 9 9 9 9 9 9 9 9 9 . . . .
+        . 9 9 9 8 8 8 8 8 8 9 9 9 . . .
+        9 9 8 8 9 9 9 9 9 9 8 8 9 9 . .
+        9 8 8 9 9 1 1 1 1 9 9 8 8 9 . .
+        9 8 9 9 1 9 9 9 9 1 9 9 8 9 . .
+        9 8 9 1 9 9 8 8 9 9 1 9 8 9 . .
+        9 8 9 1 9 8 9 9 8 9 1 9 8 9 . .
+        9 8 9 1 9 8 9 9 8 9 1 9 8 9 . .
+        9 8 9 1 9 9 8 8 9 9 1 9 8 9 . .
+        9 8 9 9 1 9 9 9 9 1 9 9 8 9 . .
+        9 8 8 9 9 1 1 1 1 9 9 8 8 9 . .
+        9 9 8 8 9 9 9 9 9 9 8 8 9 9 . .
+        . 9 9 9 8 8 8 8 8 8 9 9 9 . . .
+        . . 9 9 9 9 9 9 9 9 9 9 . . . .
+        . . . . 9 9 9 9 9 9 . . . . . .
+    `;
+
     //% fixedInstance jres blockIdentity=images._tile
-    export const spawn = image.ofBuffer(hex`87041000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001001000000000000100100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`);
+    export const spawn = img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . 1 1 . . . . . . . .
+        . . . . . . 1 1 . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+
     //% fixedInstance jres blockIdentity=images._tile
-    export const quiz_marker = image.ofBuffer(hex`87041000100000000000000000000000000000000000000000c0cc000000000000cccc0c00000000c01cc1cc0c000000c0c1cccccc0c0000c0c100cc110c0000c0c1c0cccc0c0000c0c1cccc0c000000c01cc1cc0000000000cccc0c0000000000c0cc00000000000000000000000000000000000000000000000000000000000000000000000000`);
+    export const quiz_marker = img`
+        . . . . . . . . . . . . . . . .
+        . . . . c c c c c c . . . . . .
+        . . . c c 1 1 1 1 c c . . . . .
+        . . c c 1 c c c c 1 c c . . . .
+        . . c c 1 c . . c 1 c c . . . .
+        . . c c c c . c c c c c . . . .
+        . . . c c c c c c c c . . . . .
+        . . . . c c c c c c . . . . . .
+        . . . . c c 1 c c . . . . . . .
+        . . . . . c 1 c . . . . . . . .
+        . . . . . c c c . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
+
     //% fixedInstance jres blockIdentity=images._tile
-    export const boss_marker = image.ofBuffer(hex`8704100010000000000000000000000000000000000000000020222200000000002222220200000020f22f22220000002022222f22000000202222f222000000202222f2220000002022222f2200000020f22f2222000000002222220200000000202222000000000000000000000000000000000000000000000000000000000000000000000000`);
+    export const boss_marker = img`
+        . . . . . . . . . . . . . . . .
+        . . . . 2 2 2 2 2 2 . . . . . .
+        . . . 2 2 2 2 2 2 2 2 . . . . .
+        . . 2 2 f 2 2 2 2 f 2 2 . . . .
+        . . 2 2 f 2 2 2 2 f 2 2 . . . .
+        . . 2 2 2 2 2 2 2 2 2 2 . . . .
+        . . 2 2 2 f 2 2 f 2 2 2 . . . .
+        . . 2 2 2 2 f f 2 2 2 2 . . . .
+        . . . 2 2 2 2 2 2 2 2 . . . . .
+        . . . . 2 2 2 2 2 2 . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `;
 }

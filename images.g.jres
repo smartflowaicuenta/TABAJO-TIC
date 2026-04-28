@@ -1,77 +1,8 @@
 {
     "*": {
+        "namespace": "myTiles",
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",
-        "namespace": "myTiles"
-    },
-    "transparency16": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
-    },
-    "grass_top": {
-        "data": "hwQQABAAAAB35u7t7t7u7mfm7e7u7u7tZ+bt3u7u7u535u7u3u7t7mfm3u7u7u7uZ9bu7u7u7u5n5+7u3u7u3nfm3t7u7u7uZ+bu7u7u7e531u7u7u7u7mfm7u7u7u7uZ+ft7u7t7u5n1u3e7u7e7nfm7u7u7u7uZ+be7u7u7u1n5u7u7u3u7g==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
-    },
-    "dirt": {
-        "data": "hwQQABAAAADu7u7u7e7u7t7u7u7u7u7u7u7u7e7u7u3u7u3u7t7u7u7u7u7u7u7u3t7u7u3u3u7u7u7u7u7u7u7u3u7u7u7u7t7u7u7t7u7u7u7u7u7u7u7u7u3e7t7u3u7u7u7u7u7u7u7u7u7u7u7e7u7u7u7u7u7e7u7e7u3u7u7u7u7u7g==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
-    },
-    "spike": {
-        "data": "hwQQABAAAAAAABDv7e7u7gAAEe/u7d7uABAR7+7u7u4AABHv3u7u7gAAEO/t3t7uAAAR7+7u7u4AEBHv7u7u7gAAEe/u7u7uAAAQ7+3t3u4AABHv7u7u7gAQEe/e3u7uAAAR7+7u7u4AABDv7e7u7gAAEe/u3t7uABAR7+7u7u4AABHv7u7u7g==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
-    },
-    "coin_marker": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAABVVVUAAAAAUFVVVQUAAABVVVVVVQAAAFVVVVVVAAAAVVVVVVUAAABVVVVVVQAAAFVVVVVVAAAAVVVVVVUAAABQVVVVBQAAAABVVVUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
-    },
-    "mushroom_marker": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHcAAAAAAABwdwcAAAAAAHd2dwAAAAAAd3d3AAAAAAB3d3cAAAAAAHd2dwAAAAAAcHcHAAAAAAAAdwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
-    },
-    "key_marker": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAABERAAAAAAAQEREBAAAAABEREREAAAAAEREREQAAAAARERERAAAAABEREREAAAAAEREREQAAAAARERERAAAAABAREQEAAAAAABERAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
-    },
-    "surprise_box": {
-        "data": "hwQQABAAAADu7u7u7u7u7k5ERERERETkTlVVVVVVVeRORURERERU5E5FVVVVVVTkTkXl7u5eVOROReX/7l5U5E5F5e/vX1TkTkXl7+5eVOROReXu7l5U5E5F5VX1VVTkTkVVRUREVORORURUVVVV5E5VVUVERETkTkRE5O7u7u7u7u7u7u7u7g==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
-    },
-    "lava": {
-        "data": "hwQQABAAAAAiJEJCJCRCIkIkREIiJEQiQiIkREIkJEJEQiQkQkIkRCRCQiREQiIkIkRCIiRCQiQiJERCJCRCIkIkJEJCJERCQiIkREIkJEJEQiIkREIkRCJCQiQkQiIkIkRCQiREQiRCJERCIiREQkIiJEJCJCRCJEIkJEJCIkIiRCIkREIiJA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
-    },
-    "teleport_a": {
-        "data": "hwQQABAAAAAAsLu7u7sLAAC7zMzMzLsAsMu8u7vLvAuwy7sREbu8C7u8G7u7scu7u7yxy7wby7u7vLG8yxvLu7u8sbzLG8u7u7yxy7wby7u7vBu7u7HLu7DLuxERu7wLsMu8u7vLvAsAu8zMzMy7AACwu7u7uwsAAAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
-    },
-    "teleport_b": {
-        "data": "hwQQABAAAAAAkJmZmZkJAACZiIiIiJkAkImYmZmJmAmQiZkREZmYCZmYGZmZkYmZmZiRiZgZiZmZmJGYiRmJmZmYkZiJGYmZmZiRiZgZiZmZmBmZmZGJmZCJmRERmZgJkImYmZmJmAkAmYiIiIiZAACQmZmZmQkAAAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
-    },
-    "spawn": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQAAAAAAABABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
-    },
-    "quiz_marker": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAMDMAAAAAAAAzMwMAAAAAMAcwcwMAAAAwMHMzMwMAADAwQDMEQwAAMDBwMzMDAAAwMHMzAwAAADAHMHMAAAAAADMzAwAAAAAAMDMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true
-    },
-    "boss_marker": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAACAiIgAAAAAAIiIiAgAAACDyLyIiAAAAICIiLyIAAAAgIiLyIgAAACAiIvIiAAAAICIiLyIAAAAg8i8iIgAAAAAiIiICAAAAACAiIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
         "tilemapTile": true
     }
 }
