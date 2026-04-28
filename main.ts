@@ -430,7 +430,7 @@ function Crear_Jugador() {
     JUGADOR = sprites.create(IMG_JUGADOR_QUIETO, SpriteKind.Player)
 
     // Lo coloco en la celda donde he marcado el spawn (tile "spawn") en el tilemap.
-    tiles.placeOnRandomTile(JUGADOR, myTiles.spawn)
+    tiles.placeOnRandomTile(JUGADOR, assets.tile`spawn`)
 
     // Movimiento: solo izquierda/derecha. La velocidad vy la dejo a 0 para que
     // las flechas arriba/abajo no muevan al jugador (controlamos el salto con A).
@@ -455,11 +455,11 @@ function Crear_Jugador() {
 // Paso 5: monedas. Pongo una sobre cada cuadrado amarillo del mapa.
 function Crear_Monedas() {
     // Recorro todas las celdas marcadas como coin_marker.
-    for (let posicion of tiles.getTilesByType(myTiles.coin_marker)) {
+    for (let posicion of tiles.getTilesByType(assets.tile`coin_marker`)) {
         let moneda = sprites.create(COIN_FRAMES[0], SpriteKind.Coin)
         tiles.placeOnTile(moneda, posicion)
         // Quito el cuadrado amarillo (lo "oculto" sustituyendolo por transparente).
-        tiles.setTileAt(posicion, myTiles.transparency16)
+        tiles.setTileAt(posicion, assets.tile`transparency16`)
         // Animacion de la moneda girando.
         animation.runImageAnimation(moneda, COIN_FRAMES, 100, true)
     }
@@ -467,19 +467,19 @@ function Crear_Monedas() {
 
 // Paso 6: setas. Cuando las recoge, las cambio por un corazon que da vida.
 function Crear_Setas() {
-    for (let posicion of tiles.getTilesByType(myTiles.mushroom_marker)) {
+    for (let posicion of tiles.getTilesByType(assets.tile`mushroom_marker`)) {
         let seta = sprites.create(IMG_SETA, SpriteKind.Mushroom)
         tiles.placeOnTile(seta, posicion)
-        tiles.setTileAt(posicion, myTiles.transparency16)
+        tiles.setTileAt(posicion, assets.tile`transparency16`)
     }
 }
 
 // Paso 7: llave (objetivo del nivel).
 function Crear_Llave() {
-    for (let posicion of tiles.getTilesByType(myTiles.key_marker)) {
+    for (let posicion of tiles.getTilesByType(assets.tile`key_marker`)) {
         let llave = sprites.create(KEY_FRAMES[0], SpriteKind.Key)
         tiles.placeOnTile(llave, posicion)
-        tiles.setTileAt(posicion, myTiles.transparency16)
+        tiles.setTileAt(posicion, assets.tile`transparency16`)
         animation.runImageAnimation(llave, KEY_FRAMES, 250, true)
     }
 }
@@ -716,7 +716,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite, otherSprite) {
     if (sprite.vy > 0 && sprite.bottom <= otherSprite.top + 6) {
         // El jugador cae sobre el boss: le baja un punto de vida.
-        let hp = sprites.readDataNumber(otherSprite, "hp") - 1
+        let hp = sprites.readDataNumber(otherSprite, "hp")
+
+        hp = hp - 1
         sprites.setDataNumber(otherSprite, "hp", hp)
         otherSprite.sayText("HP " + hp, 800, false)
         if (hp <= 0) {
@@ -737,13 +739,13 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite, otherSpr
 })
 
 // --- Paso 10 (vidas): tocar lava = -1 vida.
-scene.onOverlapTile(SpriteKind.Player, myTiles.lava, function (sprite, location) {
+scene.onOverlapTile(SpriteKind.Player, assets.tile`lava`, function (sprite, location) {
     info.changeLifeBy(-1)
     // Vuelve al spawn (para que no caiga de nuevo).
-    tiles.placeOnRandomTile(JUGADOR, myTiles.spawn)
+    tiles.placeOnRandomTile(JUGADOR, assets.tile`spawn`)
 })
 
-scene.onOverlapTile(SpriteKind.Player, myTiles.spike, function (sprite, location) {
+scene.onOverlapTile(SpriteKind.Player, assets.tile`spike`, function (sprite, location) {
     info.changeLifeBy(-1)
     sprite.vy = -180
 })
@@ -766,9 +768,9 @@ game.onUpdateInterval(50, function () {
         return
     }
     let loc = tiles.getTileLocation(col, row)
-    if (tiles.tileAtLocationEquals(loc, myTiles.surprise_box)) {
+    if (tiles.tileAtLocationEquals(loc, assets.tile`surprise_box`)) {
         // La caja "se rompe" -> la sustituyo por dirt (que sigue siendo muro).
-        tiles.setTileAt(loc, myTiles.dirt)
+        tiles.setTileAt(loc, assets.tile`dirt`)
         tiles.setWallAt(loc, true)
         // Suelta una moneda justo encima.
         let recompensa = sprites.create(COIN_FRAMES[0], SpriteKind.Coin)
@@ -822,16 +824,16 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.PowerJump, function (sprite, oth
 //  TELETRANSPORTES (mejora opcional)
 //  Cuando el jugador pisa un teletransporte tipo A, sale por el B.
 // ============================================================
-scene.onOverlapTile(SpriteKind.Player, myTiles.teleport_a, function (sprite, location) {
-    let destinos = tiles.getTilesByType(myTiles.teleport_b)
+scene.onOverlapTile(SpriteKind.Player, assets.tile`teleport_a`, function (sprite, location) {
+    let destinos = tiles.getTilesByType(assets.tile`teleport_b`)
     if (destinos.length > 0) {
         tiles.placeOnTile(JUGADOR, destinos[0])
         music.play(music.melodyPlayable(music.zapped), music.PlaybackMode.InBackground)
     }
 })
 
-scene.onOverlapTile(SpriteKind.Player, myTiles.teleport_b, function (sprite, location) {
-    let destinos = tiles.getTilesByType(myTiles.teleport_a)
+scene.onOverlapTile(SpriteKind.Player, assets.tile`teleport_b`, function (sprite, location) {
+    let destinos = tiles.getTilesByType(assets.tile`teleport_a`)
     if (destinos.length > 0) {
         tiles.placeOnTile(JUGADOR, destinos[0])
         music.play(music.melodyPlayable(music.zapped), music.PlaybackMode.InBackground)
@@ -900,7 +902,9 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 // Cuando un proyectil toca a un enemigo: reduce su vida; si llega a 0, lo destruye.
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprite.destroy()
-    let hp = sprites.readDataNumber(otherSprite, "hp") - 1
+    let hp = sprites.readDataNumber(otherSprite, "hp")
+
+    hp = hp - 1
     sprites.setDataNumber(otherSprite, "hp", hp)
     if (hp <= 0) {
         otherSprite.destroy(effects.fire, 300)
@@ -912,7 +916,9 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
 
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite, otherSprite) {
     sprite.destroy()
-    let hp = sprites.readDataNumber(otherSprite, "hp") - 1
+    let hp = sprites.readDataNumber(otherSprite, "hp")
+
+    hp = hp - 1
     sprites.setDataNumber(otherSprite, "hp", hp)
     if (hp <= 0) {
         otherSprite.destroy(effects.fire, 500)
