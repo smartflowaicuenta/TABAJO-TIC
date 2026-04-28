@@ -1,0 +1,35 @@
+{
+    "name": "juego-plataformas-niveles",
+    "version": "0.1.0",
+    "description": "Juego de plataformas con varios niveles, recompensas, enemigos y mejoras. Trabajo de Tecnologia.",
+    "license": "MIT",
+    "dependencies": {
+        "device": "*",
+        "animation": "*",
+        "game": "*",
+        "music": "*",
+        "sprites": "*",
+        "controller": "*",
+        "tiles": "*",
+        "info": "*",
+        "scene": "*",
+        "status-bars": "github:microsoft/arcade-status-bars#v0.5.0"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md",
+        "assets.json",
+        "images.g.jres",
+        "images.g.ts",
+        "tilemap.g.jres",
+        "tilemap.g.ts"
+    ],
+    "testFiles": [],
+    "testDependencies": {},
+    "public": true,
+    "supportedTargets": [
+        "arcade"
+    ],
+    "preferredEditor": "tsprj"
+}

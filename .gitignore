@@ -1,0 +1,13 @@
+built
+node_modules
+yotta_modules
+yotta_targets
+pxt_modules
+_site
+*.db
+*.tgz
+.header.json
+.simstate.json
+_tools/node_modules
+_tools/package-lock.json
+_tools/package.json
