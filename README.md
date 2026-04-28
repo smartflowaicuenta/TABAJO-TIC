@@ -53,7 +53,7 @@ He cumplido los 12 pasos del documento del profesor:
   - **Estrella verde**: super-salto durante 7 segundos.
 - Teletransportes (los tiles morado y azul te llevan de un sitio a otro).
 - Proyectiles (boton B) que destruyen enemigos.
-- Status bar sobre los enemigos (la barra roja se va vaciando al recibir golpes).
+- Vida de los enemigos: cuando los golpeas, los mas duros aguantan varios golpes y van mostrando los HP que les quedan en un bocadillo.
 - NPC con un acertijo: si lo aciertas te da una vida extra.
 
 ## Como abrir el proyecto

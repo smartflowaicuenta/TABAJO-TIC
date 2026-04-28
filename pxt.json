@@ -4,16 +4,7 @@
     "description": "Juego de plataformas con varios niveles, recompensas, enemigos y mejoras. Trabajo de Tecnologia.",
     "license": "MIT",
     "dependencies": {
-        "device": "*",
-        "animation": "*",
-        "game": "*",
-        "music": "*",
-        "sprites": "*",
-        "controller": "*",
-        "tiles": "*",
-        "info": "*",
-        "scene": "*",
-        "status-bars": "github:microsoft/arcade-status-bars#v0.5.0"
+        "device": "*"
     },
     "files": [
         "main.blocks",
