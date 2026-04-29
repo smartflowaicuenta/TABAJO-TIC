@@ -1,8 +1,0 @@
-{
-    "*": {
-        "namespace": "myTiles",
-        "mimeType": "image/x-mkcd-f4",
-        "dataEncoding": "base64",
-        "tilemapTile": true
-    }
-}

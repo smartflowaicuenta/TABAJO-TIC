@@ -16,7 +16,6 @@ let Contador_nivel = 2
 let velocidadJugador = 100
 let saltoNormal = -210
 let bossHP = 5
-let bossActivo = false
 
 
 // ============================================================
@@ -146,9 +145,6 @@ function Crear_Jugador () {
 //   PASO 11 (mejora): CREAR BOSS (solo nivel 2)
 // ============================================================
 function Crear_Boss () {
-    if (Nivel_actual != 2) {
-        return
-    }
     let boss = sprites.create(img`
         . . 2 2 2 2 2 2 2 2 2 2 . .
         . 2 2 f 2 2 2 2 2 2 f 2 2 .
@@ -165,7 +161,6 @@ function Crear_Boss () {
     `, SpriteKind.Boss)
     tiles.placeOnTile(boss, tiles.getTileLocation(46, 8))
     bossHP = 5
-    bossActivo = true
 }
 
 
@@ -180,7 +175,6 @@ function clearGame () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     sprites.destroyAllSpritesOfKind(SpriteKind.Boss)
     sprites.destroyAllSpritesOfKind(SpriteKind.Projectile)
-    bossActivo = false
 }
 
 function Iniciar_Nivel () {
@@ -293,7 +287,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite, otherSpr
         if (bossHP <= 0) {
             otherSprite.destroy(effects.fire, 500)
             info.changeScoreBy(500)
-            bossActivo = false
         }
         sprite.vy = saltoNormal
     } else {
@@ -327,7 +320,6 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite, othe
     if (bossHP <= 0) {
         otherSprite.destroy(effects.fire, 500)
         info.changeScoreBy(500)
-        bossActivo = false
     } else {
         otherSprite.sayText("HP " + bossHP, 800, false)
     }
@@ -340,9 +332,6 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite, othe
 
 // Boton A = saltar (solo si esta tocando el suelo)
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!JUGADOR) {
-        return
-    }
     if (JUGADOR.isHittingTile(CollisionDirection.Bottom)) {
         JUGADOR.vy = saltoNormal
         music.play(music.melodyPlayable(music.jumpUp), music.PlaybackMode.InBackground)
@@ -351,9 +340,6 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 
 // Boton B = disparar proyectil hacia donde mira el jugador (mejora opcional)
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (!JUGADOR) {
-        return
-    }
     let bala = sprites.createProjectileFromSprite(img`
         . 4 4 .
         4 5 5 4
