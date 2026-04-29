@@ -170,13 +170,15 @@ function dataJresParaTilemap(nivel) {
     return Buffer.from(hexStr, "ascii").toString("base64");
 }
 
-// Devuelve el wall map como string de img: "." donde no hay muro, "1" donde si.
+// Devuelve el wall map como string de img: "." donde no hay muro, "2" donde si.
+// IMPORTANTE: tiene que ser "2" porque pxt-arcade compara con TM_WALL = 2
+// (constant en pxt-common-packages/libs/game/tilemap.ts).
 function wallMapImg(nivel) {
     let out = "\n";
     for (let r = 0; r < ALTO; r++) {
         for (let c = 0; c < ANCHO; c++) {
             const ch = nivel[r][c];
-            out += (WALL_TILES.has(ch) ? "1" : ".") + " ";
+            out += (WALL_TILES.has(ch) ? "2" : ".") + " ";
         }
         out += "\n";
     }

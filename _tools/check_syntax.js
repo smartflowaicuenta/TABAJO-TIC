@@ -7,7 +7,6 @@ const ts = require("typescript");
 
 const archivos = [
     "../main.ts",
-    "../images.g.ts",
     "../tilemap.g.ts",
 ];
 

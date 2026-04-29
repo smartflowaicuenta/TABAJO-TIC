@@ -1,7 +1,3 @@
-// JUEGO DE PLATAFORMAS - Trabajo de Tecnologia (2 Bach)
-// Hecho con Microsoft MakeCode Arcade.
-// Sigo los pasos del guion del profesor (1 al 12) + las mejoras obligatorias.
-
 namespace SpriteKind {
     export const Coin = SpriteKind.create()
     export const Mushroom = SpriteKind.create()
@@ -17,10 +13,6 @@ let velocidadJugador = 100
 let saltoNormal = -210
 let bossHP = 5
 
-
-// ============================================================
-//   PASO 8: FUNCION ENEMIGO con parametros (Fila, Columna, Velocidad)
-// ============================================================
 function Enemigo_1 (Fila: number, Columna: number, Velocidad_x: number) {
     let enem = sprites.create(img`
         . . 2 2 2 2 2 2 . .
@@ -40,10 +32,6 @@ function Enemigo_1 (Fila: number, Columna: number, Velocidad_x: number) {
     enem.ay = 250
 }
 
-
-// ============================================================
-//   PASO 5: CREAR MONEDAS (las pongo en posiciones concretas)
-// ============================================================
 function crear_moneda (col: number, fila: number) {
     let moneda = sprites.create(img`
         . . 5 5 5 5 . .
@@ -58,10 +46,6 @@ function crear_moneda (col: number, fila: number) {
     tiles.placeOnTile(moneda, tiles.getTileLocation(col, fila))
 }
 
-
-// ============================================================
-//   PASO 6: CREAR SETAS (dan vida)
-// ============================================================
 function crear_seta (col: number, fila: number) {
     let seta = sprites.create(img`
         . . . 7 7 7 7 7 . . . . . . . .
@@ -84,10 +68,6 @@ function crear_seta (col: number, fila: number) {
     tiles.placeOnTile(seta, tiles.getTileLocation(col, fila))
 }
 
-
-// ============================================================
-//   PASO 7: CREAR LLAVE (objetivo del nivel)
-// ============================================================
 function crear_llave (col: number, fila: number) {
     let llave = sprites.create(img`
         . . . 5 5 5 . . . .
@@ -104,10 +84,6 @@ function crear_llave (col: number, fila: number) {
     tiles.placeOnTile(llave, tiles.getTileLocation(col, fila))
 }
 
-
-// ============================================================
-//   PASO 2 + 3: CREAR JUGADOR (con animacion, gravedad y movimiento)
-// ============================================================
 function Crear_Jugador () {
     JUGADOR = sprites.create(img`
         . . . . f f f f f f . . . . . .
@@ -127,23 +103,16 @@ function Crear_Jugador () {
         . . . . f f f . . f f f . . . .
         . . . . . . . . . . . . . . . .
     `, SpriteKind.Player)
-    // Lo coloco en el tile spawn que he marcado en el mapa.
     tiles.placeOnRandomTile(JUGADOR, assets.tile`spawn`)
-    // Por si acaso no encontrara el spawn, lo dejo en una posicion segura.
     if (JUGADOR.x < 1 && JUGADOR.y < 1) {
         JUGADOR.setPosition(16, 200)
     }
-    // Movimiento horizontal con flechas, vy=0 para que arriba/abajo no muevan.
     controller.moveSprite(JUGADOR, velocidadJugador, 0)
     JUGADOR.vy = 0
-    JUGADOR.ay = 350      // gravedad
+    JUGADOR.ay = 350
     scene.cameraFollowSprite(JUGADOR)
 }
 
-
-// ============================================================
-//   PASO 11 (mejora): CREAR BOSS (solo nivel 2)
-// ============================================================
 function Crear_Boss () {
     let boss = sprites.create(img`
         . . 2 2 2 2 2 2 2 2 2 2 . .
@@ -163,10 +132,6 @@ function Crear_Boss () {
     bossHP = 5
 }
 
-
-// ============================================================
-//   FUNCIONES DE NIVEL (PASO 12)
-// ============================================================
 function clearGame () {
     sprites.destroyAllSpritesOfKind(SpriteKind.Coin)
     sprites.destroyAllSpritesOfKind(SpriteKind.Mushroom)
@@ -179,7 +144,6 @@ function clearGame () {
 
 function Iniciar_Nivel () {
     Crear_Jugador()
-    // Monedas y setas del nivel 1: las posiciones las saque mirando el mapa.
     crear_moneda(7, 5)
     crear_moneda(31, 5)
     crear_moneda(14, 9)
@@ -188,7 +152,6 @@ function Iniciar_Nivel () {
     crear_moneda(39, 12)
     crear_seta(6, 12)
     crear_llave(45, 10)
-    // Enemigos del nivel 1.
     Enemigo_1(13, 18, 30)
     Enemigo_1(13, 36, 40)
     Enemigo_1(7, 33, 25)
@@ -196,7 +159,6 @@ function Iniciar_Nivel () {
 
 function Iniciar_segundo_nivel () {
     Crear_Jugador()
-    // Monedas, setas y llave del nivel 2.
     crear_moneda(4, 5)
     crear_moneda(21, 5)
     crear_moneda(39, 6)
@@ -208,7 +170,6 @@ function Iniciar_segundo_nivel () {
     crear_seta(18, 9)
     crear_seta(4, 12)
     crear_llave(49, 8)
-    // Enemigos del nivel 2: mas y mas rapidos.
     Enemigo_1(7, 10, 50)
     Enemigo_1(7, 22, -45)
     Enemigo_1(10, 12, 55)
@@ -239,35 +200,24 @@ function Tiene_otro_nivel () {
     }
 }
 
-
-// ============================================================
-//   EVENTOS DEL JUEGO
-// ============================================================
-
-// Paso 5: recoger moneda = +1 punto
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Coin, function (sprite, otherSprite) {
     otherSprite.destroy(effects.coolRadial, 200)
     info.changeScoreBy(1)
     music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.InBackground)
 })
 
-// Paso 6: recoger seta = +1 vida
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Mushroom, function (sprite, otherSprite) {
     otherSprite.destroy(effects.hearts, 200)
     info.changeLifeBy(1)
     music.play(music.melodyPlayable(music.powerUp), music.PlaybackMode.InBackground)
 })
 
-// Paso 7: coger llave = pasar de nivel
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Key, function (sprite, otherSprite) {
     otherSprite.destroy(effects.confetti, 400)
     music.play(music.melodyPlayable(music.zapped), music.PlaybackMode.InBackground)
     Tiene_otro_nivel()
 })
 
-// Paso 9: jugador-enemigo
-//   Si saltas encima: +100 puntos y muere el enemigo.
-//   Si te toca de lado: -1 vida y se destruye.
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     if (sprite.vy > 0 && sprite.bottom <= otherSprite.top + 6) {
         otherSprite.destroy(effects.fire, 200)
@@ -279,7 +229,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     }
 })
 
-// Boss: aguanta varios golpes (variable bossHP global)
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite, otherSprite) {
     if (sprite.vy > 0 && sprite.bottom <= otherSprite.top + 6) {
         bossHP = bossHP - 1
@@ -294,26 +243,22 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Boss, function (sprite, otherSpr
     }
 })
 
-// Paso 10 (lava): tocar lava = -1 vida y vuelves al spawn
 scene.onOverlapTile(SpriteKind.Player, assets.tile`lava`, function (sprite, location) {
     info.changeLifeBy(-1)
     tiles.placeOnRandomTile(JUGADOR, assets.tile`spawn`)
 })
 
-// Pinchos: -1 vida y rebota hacia arriba
 scene.onOverlapTile(SpriteKind.Player, assets.tile`spike`, function (sprite, location) {
     info.changeLifeBy(-1)
     sprite.vy = -180
 })
 
-// Proyectil del jugador toca enemigo
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprite.destroy()
     otherSprite.destroy(effects.fire, 300)
     info.changeScoreBy(50)
 })
 
-// Proyectil toca boss: le baja la vida
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite, otherSprite) {
     sprite.destroy()
     bossHP = bossHP - 1
@@ -325,12 +270,6 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Boss, function (sprite, othe
     }
 })
 
-
-// ============================================================
-//   CONTROLES (PASO 2)
-// ============================================================
-
-// Boton A = saltar (solo si esta tocando el suelo)
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (JUGADOR.isHittingTile(CollisionDirection.Bottom)) {
         JUGADOR.vy = saltoNormal
@@ -338,7 +277,6 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 
-// Boton B = disparar proyectil hacia donde mira el jugador (mejora opcional)
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     let bala = sprites.createProjectileFromSprite(img`
         . 4 4 .
@@ -351,28 +289,13 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 
-
-// ============================================================
-//   PASO 10: FINAL POR TIEMPO
-// ============================================================
 info.onCountdownEnd(function () {
     game.over(false)
 })
-
-
-// ============================================================
-//   AL INICIAR (arranque del juego)
-// ============================================================
 
 info.setScore(0)
 info.setLife(3)
 Contador_nivel = 2
 Nivel_actual = 1
-
-// Cargo el primer nivel ANTES del splash, asi cuando cierras el splash con A
-// ya esta el juego cargado debajo y no hay pantalla en negro.
 Cambio_Nivel()
-
-// Mejora obligatoria: instrucciones al comienzo de la partida.
 game.splash("JUEGO DE PLATAFORMAS", "Flechas mover, A saltar, B disparar")
-
